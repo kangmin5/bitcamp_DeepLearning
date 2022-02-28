@@ -32,18 +32,16 @@ if __name__ == '__main__':
             calc = Calcurator(num1,num2,opcode)
 
             if(opcode == '+'):
-                print('*' * 30)
-                print(f'{calc.num1}+{calc.num2}={calc.add()}')
-                print('*' * 30)
-            elif(opcode == '-'):
-                print('*' * 30)
-                print(f'{calc.num1}-{calc.num2}={calc.sub()}')
-                print('*' * 30)
-            elif(opcode == '*'):
-                print('*' * 30)
-                print(f'{calc.num1}*{calc.num2}={calc.mul()}')
-                print('*' * 30)
+                res = calc.add()
+            elif (opcode == '-'):
+                res = calc.sub()
+            elif (opcode == '*'):
+                res = calc.mul()
             elif(opcode == '/'):
-                print('*' * 30)
-                print(f'{calc.num1}/{calc.num2}={calc.div()}')
-                print('*' * 30)
+                res= calc.div()
+
+            print('*' * 30)
+            print(f'{calc.num1}{opcode}{calc.num2}={res}')
+            print('*' * 30)
+
+
