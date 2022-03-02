@@ -1,6 +1,6 @@
 class Calcurator(object):
 
-    def __init__(self, num1, num2,opcode):
+    def __init__(self, num1, num2, opcode):
         self.num1 = num1
         self.num2 = num2
         self.opcode = opcode
@@ -26,22 +26,20 @@ if __name__ == '__main__':
             break
         elif menu == '1':
             num1 = int(input('첫번째 수'))
-            opcode = input('연산자')
+            opcode: str = input('연산자')
             num2 = int(input('두번째 수'))
             # 객체생성
-            calc = Calcurator(num1,num2,opcode)
+            calc = Calcurator(num1, num2, opcode)
 
-            if(opcode == '+'):
-                res = calc.add()
-            elif (opcode == '-'):
-                res = calc.sub()
-            elif (opcode == '*'):
-                res = calc.mul()
-            elif(opcode == '/'):
-                res= calc.div()
+            if opcode == '+':
+                result = calc.add()
+            elif opcode == '-':
+                result = calc.sub()
+            elif opcode == '*':
+                result = calc.mul()
+            elif opcode == '/':
+                result = calc.div()
 
             print('*' * 30)
-            print(f'{calc.num1}{opcode}{calc.num2}={res}')
+            print(f'{calc.num1}{opcode}{calc.num2}={result}')
             print('*' * 30)
-
-
