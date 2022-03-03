@@ -5,7 +5,7 @@ from hello.models import Quiz01Calcurator, Quiz03Grade, Quiz04GradeAuto, Quiz07R
 if __name__ == '__main__':
     while 1:
         menu = input('0.Exit 1.계산기(+-*/) 2.Bmi 3.Grade 4.성적(등급까지) 5.주사위 6. 원하는범위에서1개숫자 7.멤버1명뽑기 '
-                     '8.RPS 10.윤년구하기 12.Lotto 13.Bank입출금 14.책받침구구단')
+                     '8.RPS 9.getPrime 10.윤년구하기 11.NumberGolf 12.Lotto 13.Bank입출금 14.책받침구구단')
         if menu == 0:
             break
         elif menu == '1':
@@ -65,12 +65,12 @@ if __name__ == '__main__':
             print(f"{q7.chooseMember()}")
 # --------------------------------------------------------------
         elif menu =='8':
-            player = int(input('[플레이어] 가위0,바위1,보2 : '))
-            q8 = Quiz08Rps(player)
-            print(f"가위 바위 보 의 결과는 : {q8.game()}")
+            q8 = Quiz08Rps()
+            print(f'{q8.game()}')
 # --------------------------------------------------------------
         elif menu == '9':
-            q13 = Quiz09GetPrime()
+            q9 = Quiz09GetPrime()
+            print(f'{q9.prime()}')
 # --------------------------------------------------------------
         elif menu == '10':
             year = int(input('년도입력 : '))
@@ -78,7 +78,8 @@ if __name__ == '__main__':
             print(f"윤년확인 : {q10.leap()}")
 # --------------------------------------------------------------
         elif menu == '11':
-            q13 = Quiz11NumberGolf()
+            q11 = Quiz11NumberGolf()
+            print(f'{q11.game()}')
 # --------------------------------------------------------------
         elif menu =='12':
             q12 = Quiz12Lotto()

@@ -111,33 +111,34 @@ class Quiz07RandomChoice(object):
         return self.members[myRandom(1,3)]
 
 class Quiz08Rps(object):
-    def __init__(self ,player):
-        self.player =player
-        self.computer = myRandom(0,2)
     def game(self):
-        p= self.player
-        c= self.computer
-        rps = ["가위","바위","보"]
-        result = {0: f'컴결과{rps[c]} 플레이어가 승리했습니다.', 1: f'컴결과{rps[c]} 플레이어가 패배했습니다.', 2: f'컴결과{rps[c]}  비겼습니다.'}
+        while 1:
+            p = int(input('0.가위 1.바위 2.보 3.EXIT'))
+            c = myRandom(0, 2)
+            if p == 3:
+                return 'EXIT'
+            if c-p == 2 or c-p == -1:
+                print(f'플레이어: {p}\n 컴퓨터:{c}\n 결과:WIN')
+            elif c-p == 1 or c-p == -2:
+                print(f'플레이어: {p}\n 컴퓨터:{c}\n 결과:LOSE')
+            elif c-p == 0:
+                print(f'플레이어: {p}\n 컴퓨터:{c}\n 결과:DRAW')
 
-
-        if p == c:
-            state = 2
-        elif p == '가위' and c == '바위':
-            state = 1
-        elif p == '바위' and c == '보':
-            state = 1
-        elif p == '보' and c == '가위':
-            state = 1
-        else:
-            state = 0
-        return result[state]
 
 
 
 class Quiz09GetPrime(object):
-    def __init__(self):
-        pass
+    def prime(self):
+        a = int(input('최대값'))
+        res = ''
+        for i in range(2, a):
+            num = 0
+            for j in range(2, i + 1):
+                if i % j == 0:
+                    num += 1
+            if num == 1:
+                res += str(i) + '\t'
+        return res
 class Quiz10LeapYear(object):
     def __init__(self,year):
         self.year = year
@@ -145,11 +146,25 @@ class Quiz10LeapYear(object):
         if(self.year %4 == 0) and (self.year %100 !=0) or (self.year %400 ==0):
             return '윤년입니다'
         else:
-            return '윤년이 아닙니다'
+            return '평년입니다'
 
 class Quiz11NumberGolf(object):
     def __init__(self):
-        pass
+        self.static = myRandom(0, 100)
+
+    def game(self):
+        st = self.static
+        count=0
+        while 1:
+            se = int(input('숫자!'))
+            if st == se:
+                return f'정답\n 틀린횟수:{count}'
+            elif st > se:
+                count += 1
+                print('업')
+            elif st < se:
+                count += 1
+                print('아래')
 # ----------------------------------------------
 class Quiz12Lotto(object):
     def lotto(self):
