@@ -1,4 +1,3 @@
-
 from titanic.models import Model
 from titanic.domains import Dataset
 

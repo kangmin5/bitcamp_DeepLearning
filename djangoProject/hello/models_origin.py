@@ -1,5 +1,5 @@
 import random
-import domains
+import domains_origin
 
 
 class Quiz01Calcurator():
