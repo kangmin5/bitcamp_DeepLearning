@@ -139,6 +139,9 @@ class Quiz09GetPrime(object):
             if num == 1:
                 res += str(i) + '\t'
         return res
+
+
+
 class Quiz10LeapYear(object):
     def __init__(self,year):
         self.year = year

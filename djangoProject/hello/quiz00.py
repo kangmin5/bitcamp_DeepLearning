@@ -1,6 +1,6 @@
 import random
 
-from hello.domains import my100, myRandom, Member
+from hello.domains import my100, myRandom, Member, members
 
 
 class Quiz00:
@@ -80,18 +80,35 @@ class Quiz00:
         return None
 # --------------------------------------------------------------
     def quiz06memberChoice(self):
-        members = ['홍정명', '노홍주', '전종현', '정경준', '양정오',
-                   "권혜민", "서성민", "조현국", "김한슬", "김진영",
-                   '심민혜', '권솔이', '김지혜', '하진희', '최은아',
-                   '최민서', '한성수', '김윤섭', '김승현',
-                   "강 민", "최건일", "유재혁", "김아름", "장원종"]
-        return members[myRandom(0, 23)]
-
+        student = members()
+        res= student[(random.randint(0, 23))]
+        print(f'선택 학생은 {res}')
+        return None
+# -----------------------------------------------------------------
     def quiz07lotto(self):
-        pass
-
-    def quiz08bank(self):  # 이름, 입금, 출금만 구현
-        pass
-
+        res = random.sample(range(1,46),6)
+        print(f'로또 번호는 {res}')
+        return None
+# -----------------------------------------------------------------
+    def quiz08bank(self, balance=0):  # 이름, 입금, 출금만 구현
+        name = str(input('이름 :'))
+        while 1 :
+            menu = int(input('0.종료 1. 입금 2. 출금'))
+            if menu == 0:
+                break
+            elif menu ==1:
+                save = int(input('입금액:'))
+                balance +=save
+                print(f'잔액은 {balance}')
+            elif menu ==2:
+                withdrawal = int(input('출금액:'))
+                balance -= withdrawal
+                print((f'잔액은 {balance}'))
+        return None
+# -----------------------------------------------------------------
     def quiz09gugudan(self):  # 책받침구구단
-        pass
+        for y in range(1,10):
+            for x in range(2,10):
+                print(x,'x', y, '=', x*y, end='\t')
+            print()
+        return None
