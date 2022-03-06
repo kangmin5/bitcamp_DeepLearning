@@ -1,8 +1,6 @@
 import random
 
-
 class Quiz10:
-
     def quiz10bubble(self) -> str:
         # 무작위 10까지 10개 뽑기
         arr = random.sample(range(10), 10)  # random.sample함수는 난수의 범위,갯수,중복이 제거된 것으로 나옴
@@ -14,9 +12,7 @@ class Quiz10:
                 if arr[j] > arr[j + 1]:
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
         print(f'버블 정렬 후 결과 : {arr}')
-
         return None
-
     # --------------------------------------------------------------------
     def quiz11insertion(self) -> str:
         # 무작위 10개 뽑기
@@ -32,19 +28,43 @@ class Quiz10:
                 j -= 1
             arr[j + 1] = temp
         print(f'삽입 정렬 후 결과 : {arr}')
-
         return None
-
     # --------------------------------------------------------------------
     def quiz12selection(self) -> str:
+        arr = random.sample(range(10),10)
+        print(f'무작위 10개 값 : {arr}')
+        #선택정렬
+        input('<누르면 선택정렬>')
+        for i in range(0, len(arr)-1):
+            min = i
+            j = i + 1
+            for j in range(j, len(arr)):
+                if arr[min] > arr[j]:
+                    min = j
+            arr[i], arr[min] = arr[min], arr[i]
+        print(f'선택정렬 후 결과: {arr}')
         return None
-
+    #----------------------------------------------
+    # 퀵 정렬은 pibot을 사용한다.(파이썬은 일반적으로 첫번째 arr[0]을 pibot으로 정한다)
+    # 퀵 정렬은 파이썬에서 list.sort() 와 자바의 Arrays.sort()함수로 제공된다.
+    # 이해는 가는데 매개변수 추가하는 부분과 재귀부분 떄문에 추후 업데이트.
     def quiz13quick(self) -> str:
+        arr = random.sample(range(10),10)
+        print(f'무작위 10개 값 : {arr}')
+        #퀵 정렬
+        input('<누르면 퀵정렬>')
+        list.sort(arr)   # list.sort()는 원본의 데이타를 sort시킴
+        arr1 =sorted(arr) # sorted()는 sort해서 새로운 파일로 만들때 씀.
+        print(f'list.sort() 사용시 : {arr}')
+        print(f'sorted를 사용 시(arr1에 할당) : {arr1}')
         return None
-
+#------------------------------------------------------
+# 이건 하기 싫다... 나중에 해야지
     def quiz14merge(self) -> str:
-        return None
 
+        return None
+#-------------------------------------------------------
+# magic ?? 이게 뭐지?
     def quiz15magic(self) -> str:
         return None
 
