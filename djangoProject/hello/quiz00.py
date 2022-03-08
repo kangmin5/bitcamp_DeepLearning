@@ -146,39 +146,68 @@ class Account(object):
     def creat_account_number(self):
         return "".join(["-" if i==3 or i==6  else str(random.randint(0, 9)) for i in range(13)])
 
-    def del_account(self,ls,account_number):
-        for i,j in enumerate(ls):                        # 처음 i 는 index  j는 element
+    @staticmethod
+    def find_account(ls,account_number):   # 검색
+        # return "".join([j.to_string() if j.account_number == account_number else 'Wrong account'
+        #         for i,j in enumerate(ls)])
+        for i,j in enumerate(ls):
+            if j.account_number == account_number:
+                 a= ls[j]
+        return a
+
+    @staticmethod
+    def del_account(ls,account_number):           #계좌삭제
+        for i,j in enumerate(ls):                 # 처음 i 는 index  j는 value
             if j.account_number ==account_number:
                 del ls[i]
+
+    @staticmethod
+    def save_account(ls,account_number):      # 입금
+        deposit = int(input('입금액'))
+        for i, j in enumerate(ls):  # i는 index j는 값
+            if j.account_number == account_number:
+                j.money = j.money + deposit
+        return j.money
+
+    @staticmethod
+    def withdrawal_account(ls,account_number):      # 출금 (잔액보다 크면 불가함)
+        money = int(input('출금액'))
+        for i, j in enumerate(ls):  # i는 index j는 값
+            if j.account_number == account_number:
+                if j.money>=money :
+                    j.money -= money
+                else:
+                    print(f'출금금액이 잔액보다 큽니다.')
+                # j.money = j.money- money if j.money>=money else print(f"출금액이 큼")
+
+        return j.money
 
     @staticmethod
     def main():
         ls =[]
         while 1:
-            menu = input('0.종료 1.개좌개설 2.계좌내용 3.입금 4. 출금 5.계좌해지')
+            menu = input('0.종료 1.개좌개설 2.계좌내용 3.입금 4. 출금 5.계좌해지 6.계좌조회')
             if menu == '0':
                 break
             if menu == '1':
                 acc = Account(None,None,None)
                 print(f'{acc.to_string()}...개설되었습니다.')
                 ls.append(acc)
-            elif menu == '2':
+            elif menu == '2': # 계좌 내용
                 a = '\n'.join(i.to_string() for i in ls )
                 print(a)
             elif menu == '3':
-                account_number = input('입금할 계좌번호')
-                deposit = input('입금액')
-                for i,j in enumerate(ls):
-                    if j.account_number == account_number:
-                        pass
-
+                Account.save_account(ls, input('입금할 계좌번호'))
 
             elif menu == '4':
-                account_number = input('출금할 계좌번호')
-                money = input('출금액')
+                Account.withdrawal_account(ls,input('출금할 계좌번호'))
+
                 #추가코드완성
             elif menu == '5':
-                account_number = input('탈퇴할 계좌번호')
+                Account.del_account(ls,input('탈퇴할 계좌번호'))
+
+            elif menu =='6': # 계좌 조회
+                print(Account.find_account(ls,input('조회할 계좌번호:') ))
             else:
                 print('Wrong Number... Try Again')
                 continue

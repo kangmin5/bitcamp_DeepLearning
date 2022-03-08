@@ -1,4 +1,4 @@
-class Quiz30:
+class Quiz31:
     def __init__(self):
         pass
 
