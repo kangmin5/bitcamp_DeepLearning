@@ -2,7 +2,7 @@ import random
 import urllib.request
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-
+import pandas as pd
 
 class Quiz20:
 
@@ -23,21 +23,53 @@ class Quiz20:
         print(a2)
         return None
 #--------------------------------------------------------------
-    def quiz24zip(self) -> str:
+    @staticmethod
+    def find_music(soup,data) -> []:
+        ls = soup.find_all('p', {'class': data})
+        return [i.get_text() for i in ls]
+
+    @staticmethod
+    def dict1(ls1,ls2)->None:
+        dict = {}
+        for i in range(0, len(ls1)):
+            dict[ls1[i]] = ls2[i]    #중요,중요(리스트를 키와 value로 만드는 공식
+        print(dict)
+
+    @staticmethod
+    def dict2(ls1,ls2)->None:
+        dict = {}
+        for i, j in enumerate(ls1):
+            dict[j] = ls2[i]        ## 핵심,핵심 i는 인덱스로 j는 value
+        print(dict)
+
+    def quiz24zip(self) -> {}:
         url='https://music.bugs.co.kr/chart/track/realtime/total'
         html_doc = urlopen(url)
-        soup = BeautifulSoup(html_doc, 'lxml') # html.parser vs lxml
-        print(soup.prettify())
+        soup = BeautifulSoup(html_doc, 'lxml')
+        ls1 = self.find_music(soup, 'title')
+        ls2 = self.find_music(soup, 'artist')
+        dict={}
+        for i, j in zip(ls1,ls2):
+            dict[i] = j               ### 이것이 결론 (이걸 써라....최신)zip : 리스트를 딕셔너리로 합치는 것
+        print(dict)
+        return dict
+        # self.dict1(ls1,ls2)
+        # self.dict2(ls1,ls2)
 
-        data = soup.find_all('p',{'class':'artist'})
+
+        # print(soup.prettify())
+        # for i,j in enumerate(['artist','title']):
+        #     for i,j in enumerate([self.find_music(soup,j)]):
+        #         print(f'{i}위 : {j}')
+        # data = soup.find_all('p',{'class':'artist'})
         # print(type(data))  'bs4.element.ResultSet' 결과가 데이타셋의 class라서 리스트,튜플,딕셔너리중 하나로 내려야 함.
-        data = [i for i in data]
+        # data = [i for i in data]
         # print(type(data))
-        data = [i.get_text() for i in data]
-        print(''.join(i for i in data))
+        # data1 = soup.find_all('p',{'class':'title'})
+        # data1 = [i.get_text() for i in data1]
+        # print(''.join(i for i in data1))
         # data = soup.select('.byChart>tbody>tr>td>p>a')
         # print(data)
-
         # data = soup.select_one('.byChart>tbody>tr>td>p>a').string
         # print(data)
 
@@ -58,12 +90,15 @@ class Quiz20:
         singer = data[1::2]
         for i,j in enumerate(title):print(f'{i+1}등 곡명:{j}')
         for x,y in enumerate(singer):print(f'{x+1}등 가수:{y}')
+        return None
 
-
+    def quiz28dataframe(self) -> str:
+        # dict = self.quiz24zip()
+        df = pd.DataFrame.from_dict(dict, orient='index')
+        print(df)
+        df.to_csv('./save/bugs.csv',sep=',',na_rep='NaN')
 
 
         return None
-
-    def quiz28(self) -> str: return None
 
     def quiz29(self) -> str: return None

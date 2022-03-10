@@ -152,8 +152,8 @@ class Account(object):
         #         for i,j in enumerate(ls)])
         for i,j in enumerate(ls):
             if j.account_number == account_number:
-                 a= ls[j]
-        return a
+                 a= ls[i]
+        return a.to_string()
 
     @staticmethod
     def del_account(ls,account_number):           #계좌삭제
@@ -208,6 +208,7 @@ class Account(object):
 
             elif menu =='6': # 계좌 조회
                 print(Account.find_account(ls,input('조회할 계좌번호:') ))
+
             else:
                 print('Wrong Number... Try Again')
                 continue
