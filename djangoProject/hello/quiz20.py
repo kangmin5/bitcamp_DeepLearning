@@ -3,6 +3,9 @@ import urllib.request
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
+from quiz00 import Quiz00
+
+
 
 class Quiz20:
 
@@ -42,19 +45,29 @@ class Quiz20:
             dict[j] = ls2[i]        ## 핵심,핵심 i는 인덱스로 j는 value
         print(dict)
 
+    @staticmethod
+    def dict3(ls1,ls2):
+        dict={}
+        for i, j in zip(ls1, ls2):
+            dict[i] = j            ### 이것이 결론 (이걸 써라....최신)zip : 리스트를 딕셔너리로 합치는 것
+        print(dict)
+
     def quiz24zip(self) -> {}:
         url='https://music.bugs.co.kr/chart/track/realtime/total'
         html_doc = urlopen(url)
         soup = BeautifulSoup(html_doc, 'lxml')
         ls1 = self.find_music(soup, 'title')
         ls2 = self.find_music(soup, 'artist')
-        dict={}
-        for i, j in zip(ls1,ls2):
-            dict[i] = j               ### 이것이 결론 (이걸 써라....최신)zip : 리스트를 딕셔너리로 합치는 것
-        print(dict)
-        return dict
         # self.dict1(ls1,ls2)
         # self.dict2(ls1,ls2)
+        # self.dict3(ls1,ls2)
+        d = {i:j for i,j in zip(ls1,ls2)}
+        l = [i+j for i,j in zip(ls1,ls2)]
+        l2= list(zip(ls1,ls2))
+        d1=dict(zip(ls1,ls2))
+        print(d1)
+        return d
+        # d= {i:j for i,j in zip(ls1,ls2)}
 
 
         # print(soup.prettify())
@@ -72,10 +85,52 @@ class Quiz20:
         # print(data)
         # data = soup.select_one('.byChart>tbody>tr>td>p>a').string
         # print(data)
+    @staticmethod
+    def dict_25(name,score)->{}:
+        dict = {}
+        for i, j in zip(name, score):
+            dict[i] = j
+        print(dict)
 
-    def quiz25dictcom(self) -> str: return None
 
-    def quiz26map(self) -> str: return None
+    def quiz25dictcom(self) -> str:
+        q=Quiz00()
+        c = set([q.quiz06memberChoice() for i in range(0,5)])
+        print(c)
+        while len(c) !=5:
+            c.add(q.quiz06memberChoice())
+        students = list(c)
+        print(students)
+        scores=[random.randint(0,100) for i in range(5)]
+        print(scores)
+        self.dict_25(students,scores)
+
+
+        # for k in d:
+        #     if scores >= 90:
+        #         grade = 'A'
+        #     elif scores >= 80:
+        #         grade = 'B'
+        #     elif scores >= 70:
+        #         grade = 'C'
+        #     elif scores >= 65:
+        #         grade = 'D'
+        #     elif scores >= 60:
+        #         grade = 'E'
+        #     else:
+        #         grade = 'F'
+        #         if grade == 'F':
+        #             passChk = '불합격'
+        #         else:
+        #             passChk = '합격'
+        #
+        # print(f'')
+
+        return None
+
+    def quiz26map(self) -> str:
+
+        return None
 #---------------------------------------------------------------------
     @staticmethod
     def find_melon(soup,data) -> []:
@@ -104,11 +159,40 @@ class Quiz20:
         # print(df)
         # df.to_csv('./save/bugs.csv',sep=',',na_rep='NaN')
 
-        dict = self.quiz27melon()
+        #dict = self.quiz27melon()
         df = pd.DataFrame.from_dict(dict,orient='index')
         print(df)
         df.to_csv('./save/melon.csv',sep=',',na_rep='NaN')
 
         return None
+# -------------------------------------------------------------------
+    '''
+    다음 결과 출력
+        a   b   c
+    1   1   3   5
+    2   2   4   6
+    '''
+    def quiz29_pandas_df(self) -> object:
+        # d={'a':[1,2],'b':[3,4],'c':[5,6]}
+        # d2={'1':[1,3,5],'2':[2,4,6]}
+        # df = pd.DataFrame(d, index=[1, 2])
+        # df2 = pd.DataFrame.from_dict(d2, orient='index',columns=['a','b','c'])
 
-    def quiz29(self) -> str: return None
+        arr1 =['a','b','c']
+        x = [i for i in arr1]
+        d1=[]
+        d2=[]
+        a = [d1.append(i) if i%2==1 else d2.append(i) for i in range(1,7)]
+        # print(d1)
+        # print(d2)
+        arr2 = [d1,d2]
+        y = [i for i in arr2]
+        b= {i:j for i,j in zip(x,y)}
+        # print(b)
+        df3 = pd.DataFrame.from_dict(b, orient='index', columns=arr1)
+
+        # d3 = {"1":[1,3,5]}
+        # d4 = {"2":[2,4,6]}
+        print(df3)
+        return None
+
