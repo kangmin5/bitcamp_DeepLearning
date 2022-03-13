@@ -1,40 +1,33 @@
+import random
+import string
+
 import pandas as pd
 from icecream import ic
 import numpy as np
 
+from hello.domains import myRandom
 
+'''
+    데이터프레임 문제 Q02
+ic| df:     A   B   C
+        1   1   2   3
+        2   4   5   6
+        3   7   8   9
+        4  10  11  12
+'''
 class Quiz30:
-    '''
-        데이터프레임 문제 Q02
-    ic| df:     A   B   C
-            1   1   2   3
-            2   4   5   6
-            3   7   8   9
-            4  10  11  12
-    '''
 
-    def quiz30_df_4_by_3(self) -> str:
+    def quiz30_df_4_by_3(self) -> object:
         # 위 식을 리스트결합 형태로 분해해서 조립하시오
-        arrx1 = []
-        arrx2 = []
-        arrx3 = []
-        arrx4 = []
 
-        lix1 = [arrx1.append(i) for i in range(1,4) ]
-        lix2 = [arrx2.append(i) for i in range(4,7) ]
-        lix3 = [arrx3.append(i) for i in range(7,10) ]
-        lix4 = [arrx4.append(i) for i in range(10,13) ]
-
-        arrx = [arrx1,arrx2,arrx3,arrx4]
-        lix = [i for i in arrx]
-
-        arry = ['A','B','C']
-        liy = [i for i in arry]
-        # print(liy)
-        # print(lix)
-        df = pd.DataFrame(lix, index=range(1, 5), columns=['A', 'B', 'C'])
+        l = [[i+j for j in range(3)] for i in range(1,13,3) ]
+        col = list(string.ascii_uppercase)[:3]
+        df = pd.DataFrame(l,index=range(1, 5), columns=col)
         ic(df)
+
         return None
+
+
 
     '''
         데이터프레임 문제 Q03.
@@ -43,8 +36,13 @@ class Quiz30:
                 0  97  57  52
                 1  56  83  80
     '''
-
     def quiz31_rand_2_by_3(self) -> str:
+        li = [[random.randint(10,99) for i in range(3)] for j in range(2)]
+        print(li)
+        idx = list(range(2))
+        col = list(range(3))
+        df=pd.DataFrame(li)
+        ic(df)
         return None
 
     '''
@@ -64,7 +62,15 @@ class Quiz30:
                         PZOTP  94  78  79  96
                         GOJKU  62  17  75  49
     '''
-    def quiz32(self) -> str: return None
+    def quiz32_df_grade(self) -> str:
+        li = [[random.randint(0,100) for i in range(4)] for j in range(10) ]
+        name = ["".join(random.choice(string.ascii_letters) for i in range(5)) for j in range(10) ]
+        df = pd.DataFrame(li,index=name,columns=['국어','영어','수학','사회'])
+        ic(df)
+
+
+
+        return None
 
     def quiz33(self) -> str: return None
 
