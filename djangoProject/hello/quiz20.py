@@ -179,31 +179,34 @@ class Quiz20:
 
     def quiz29_pandas_df(self) -> object:
         # d={'a':[1,2],'b':[3,4],'c':[5,6]}
-        # d2={'1':[1,3,5],'2':[2,4,6]}
         # df = pd.DataFrame(d, index=[1, 2])
+        # d2={'1':[1,3,5],'2':[2,4,6]}
         # df2 = pd.DataFrame.from_dict(d2, orient='index',columns=['a','b','c'])
 
-        # arr1 = ['a', 'b', 'c']
-        # x = [i for i in arr1]
-        # d1 = []
-        # d2 = []
-        # a = [d1.append(i) if i % 2 == 1 else d2.append(i) for i in range(1, 7)]
-        #
-        # arr2 = [d1, d2]
-        # 1안 (행으로 index를 통해 구하는 방식)
-        # print(arr2)
-        # df = pd.DataFrame(arr2, columns=arr1)
-        # print(df)
-
-        # 2안(pd.DataFrame.from_dict(열을 통해 dict의 key값을 통해 구하는 방식)
-        # dict_b= {'a':[1,2],'b':[3,4],'c':[5,6]}
-        # df2 = pd.DataFrame.from_dict(dict_b)
-        # print(df2)
-
-        # 3안 (2안의 b dict을 pythonic하게 만들기)
         list_1 = ['a', 'b', 'c']
         list_2 = [[1,2],[3,4],[5,6]]
         d = dict(zip(list_1,list_2))
-        df = pd.DataFrame.from_dict(d)
+        idx =[1,2]
+        df = pd.DataFrame(d,index=idx)
+        '''
+       a  b  c
+    1  1  3  5
+    2  2  4  6
+        '''
         print(df)
-        return None
+
+        df2 = pd.DataFrame.from_dict(d) #dict의 key부분이 기본적으로 DataFrame열이 됨
+        print(df2)
+        '''
+       a  b  c
+    0  1  3  5
+    1  2  4  6
+        '''
+        df3 = pd.DataFrame.from_dict(d)
+        print(df3)
+        '''
+        0  1
+    a  1  2
+    b  3  4
+    c  5  6
+        '''
