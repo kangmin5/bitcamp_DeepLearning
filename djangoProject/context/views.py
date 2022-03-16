@@ -2,7 +2,8 @@ from context.models import Model
 from context.domains import Dataset
 from icecream import ic
 
-class TitanicView:
+
+class View:
     model = Model()
     dataset = Dataset()
 
@@ -15,6 +16,6 @@ class TitanicView:
         this.train = model.new_model(train)
         this.test = model.new_model(test)
         # id 추출
-        ic(f'트레인 컬럼 {this.train.columns}')
-        ic(f'트레인 헤드 {this.train.head()}')
+        print(f'트레인 컬럼 {this.train.columns}')
+        print(f'트레인 헤드 {this.train.head()}')
         ic(this.train)

@@ -5,7 +5,7 @@ import pandas as pd
 from icecream import ic
 import numpy as np
 
-from titanic.models import Model
+from context.models import Model
 from hello.domains import myRandom, members
 
 '''
@@ -102,9 +102,9 @@ class Quiz30:
 
         # kdt5기 수강생 성적 예제 프로그램
         # subjects = ['자바', '파이썬', '자바스크립트', 'SQL']
-        # stud = list(members())
-        # d = [[random.randint(0,100) for i in range(4)] for j in range(len(stud)) ]
-        # dd = dict(zip(stud,d))
+        # student = list(members())
+        # d = [[random.randint(0,100) for i in range(4)] for j in range(len(student)) ]
+        # dd = dict(zip(student,d))
         # df= pd.DataFrame.from_dict(dd,orient='index',columns=subjects)
         # ic(df)
         # 수강생 성적 리스트 END
@@ -122,13 +122,14 @@ class Quiz30:
 
         # print('01 파이썬의 columns 전체의 점수를 출력하시오.')
         # ic(df.loc[:,'파이썬'])
-        # print('02 조현국의 row를 출력하시오')
-        # ic(df.loc['조현국'])
-        # print('03 강민의 자바 점수만 출력')
-        # ic(df.loc['강 민','자바'])
-        # print('04 자바스크립트 점수가 60점 이상인 list 뽑기')
-        # test=df['자바스크립트']>=60
-        # ic(df.loc[test])
+        print('02 조현국의 row를 출력하시오')
+        ic(type(df.loc['조현국']))
+        ic(df.loc['조현국'])
+        print('03 강민의 자바 점수만 출력')
+        ic(df.loc['강 민','자바'])
+        print('04 자바스크립트 점수가 60점 이상인 list 뽑기')
+        test=df['자바스크립트']>=60
+        ic(df.loc[test])
         print('05 몇명 슬라이스')
         ic(df.loc['권솔이':'한성수'])
         # python_scores = None
