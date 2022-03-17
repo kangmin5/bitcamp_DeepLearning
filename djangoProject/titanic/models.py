@@ -10,12 +10,12 @@ class TitanicModel(object):
         self.train = self.model.new_model(train_fname)
         self.test = self.model.new_model(test_fname)
         ic(f'트레인 컬럼 {self.train.columns}')
-        ic(f'트레인 헤드 {self.train.head()}')
+        ic(f'트레인 헤드 {self.test.head()}')
         # id 추출
 
     def preprocess(self):
         df = self.train
-        ic(df)
+        # ic(df)
         df = self.drop_feature(df)
         df = self.create_train(df)
         df = self.create_label(df)

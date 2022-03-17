@@ -4,22 +4,26 @@ from dataclasses import dataclass
 
 @dataclass
 class Dataset:
-    dname : str
-    sname : str
-    fname : str
-    train : str
-    test : str
-    id : str
-    label : str
+    dname: str
+    sname: str
+    fname: str
+    train: str
+    test: str
+    id: str
+    label: str
 
     @property
-    def dname(self) -> str : return self._dname
+    def dname(self) -> str: return self._dname
+
     @dname.setter
-    def dname(self, dname) : self._dname = dname
+    def dname(self, dname): self._dname = dname
+
     @property
     def sname(self) -> str: return self._sname
+
     @sname.setter
     def sname(self, sname): self._sname = sname
+
     @property
     def fname(self) -> str: return self._fname
 
@@ -48,4 +52,4 @@ class Dataset:
     def label(self) -> str: return self._label
 
     @label.setter
-    def label(self,label): self._label = label
+    def label(self, label): self._label = label
