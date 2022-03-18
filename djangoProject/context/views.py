@@ -7,8 +7,8 @@ class View:
     model = Model()
     dataset = Dataset()
 
-    def modeling(self, train, test):
-        model = self.model
+    # def modeling(self, train, test):
+    #     model = self.model
 
     def preprocess(self, train, test) -> object:
         model = self.model
