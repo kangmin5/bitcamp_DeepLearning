@@ -137,7 +137,7 @@ class TitanicModel(object):
             # pd.cut() 을 사용하시오. 다른 곳은 고치지 말고 다음 두 줄만 코딩하시오
             # these['AgeGroup'] = None  # pd.cut() 을 사용
             these['AgeGroup'] = pd.cut(these['Age'], bins=bins, labels=labels)
-            these['AgeGroup'] = these['Age'].map(age_mapping)
+            these['AgeGroup'] = these['AgeGroup'].map(age_mapping)
         return this
 
     @staticmethod
