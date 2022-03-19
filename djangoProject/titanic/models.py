@@ -32,11 +32,9 @@ class TitanicModel(object):
         this = self.drop_feature(this, 'Sex')
         this = self.embarked_nominal(this)
         this = self.age_ratio(this)
-        '''
-
-
-        this = self.pclass_ordinal(this)
         this = self.fare_ratio(this)
+        '''
+        this = self.pclass_ordinal(this)
         '''
 
         self.df_info(this)
@@ -160,5 +158,10 @@ class TitanicModel(object):
         this.test['Fare'] = this.test['Fare'].fillna(1)
         this.train['FareBand'] = pd.qcut(this.train['Fare'], 4)
         # print(f'qcut 으로 bins 값 설정 {this.train["FareBand"].head()}')
+        fare_mapping = {"요금A": 1, "요금B": 2, "요금C": 3, '요금D': 4}
+        labels = ['요금A', '요금B', '요금C', '요금D']
         bins = [-1, 8, 15, 31, np.inf]
+        for these in [this.train, this.test]:
+            these['FareBand'] = pd.qcut(these['Fare'],4, labels=labels)
+            these['FareBand'] = these['FareBand'].map(fare_mapping)
         return this
