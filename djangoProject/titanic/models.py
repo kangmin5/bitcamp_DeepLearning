@@ -41,8 +41,10 @@ class TitanicModel(object):
         '''
         this = self.pclass_ordinal(this)
         '''
-
-        self.df_info(this)
+        # self.df_info(this)
+        k_fold = self.create_k_fold()
+        accuracy = self.get_accuracy(this,k_fold)
+        ic(accuracy)
         return this
 
     @staticmethod
@@ -163,11 +165,19 @@ class TitanicModel(object):
         this.test['Fare'] = this.test['Fare'].fillna(1)
         this.train['FareBand'] = pd.qcut(this.train['Fare'], 4 )
         # print(f'qcut 으로 bins 값 설정 {this.train["FareBand"].head()}')
-        fare_mapping = {"요금A": 1, "요금B": 2, "요금C": 3, '요금D': 4}
+        # fare_mapping = {"요금A": 1, "요금B": 2, "요금C": 3, '요금D': 4}
+        fare_mapping = {1,2,3,4}
         labels = ['요금A', '요금B', '요금C', '요금D']
         bins = [-1, 8, 15, 31, np.inf]
         for these in [this.train, this.test]:
-            these['FareBand'] = pd.qcut(these['Fare'], 4,labels=labels)
-            these['FareBand'] = these['FareBand'].map(fare_mapping)
+            these['FareBand'] = pd.qcut(these['Fare'], 4,fare_mapping)
+            # these['FareBand'] = these['FareBand'].map(fare_mapping)
         return this
 
+    @staticmethod
+    def create_k_fold()->object:
+        return KFold(n_splits=10,shuffle=True,random_state=0)
+    @staticmethod
+    def get_accuracy(this,k_fold):
+        score = cross_val_score(RandomForestClassifier(), this.train, this.label, cv= k_fold, n_jobs=1,scoring='accuracy')
+        return round(np.mean(score)*100, 2)
