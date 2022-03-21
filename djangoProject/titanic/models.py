@@ -3,6 +3,10 @@ from icecream import ic
 
 from context.domains import Dataset
 from context.models import Model
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+
 import numpy as np
 
 
@@ -32,7 +36,8 @@ class TitanicModel(object):
         this = self.drop_feature(this, 'Sex')
         this = self.embarked_nominal(this)
         this = self.age_ratio(this)
-        this = self.fare_ratio(this)
+        this = self.drop_feature(this,'Age')
+        this = self.drop_feature(this,'Fare')
         '''
         this = self.pclass_ordinal(this)
         '''
@@ -156,12 +161,13 @@ class TitanicModel(object):
     @staticmethod
     def fare_ratio(this) -> object:
         this.test['Fare'] = this.test['Fare'].fillna(1)
-        this.train['FareBand'] = pd.qcut(this.train['Fare'], 4)
+        this.train['FareBand'] = pd.qcut(this.train['Fare'], 4 )
         # print(f'qcut 으로 bins 값 설정 {this.train["FareBand"].head()}')
         fare_mapping = {"요금A": 1, "요금B": 2, "요금C": 3, '요금D': 4}
         labels = ['요금A', '요금B', '요금C', '요금D']
         bins = [-1, 8, 15, 31, np.inf]
         for these in [this.train, this.test]:
-            these['FareBand'] = pd.qcut(these['Fare'],4, labels=labels)
+            these['FareBand'] = pd.qcut(these['Fare'], 4,labels=labels)
             these['FareBand'] = these['FareBand'].map(fare_mapping)
         return this
+
